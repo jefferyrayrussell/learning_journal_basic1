@@ -1,4 +1,4 @@
-"""This is the routes file."""
+"""This is the routes file for the Learning-Journal assignment."""
 
 
 def includeme(config):
