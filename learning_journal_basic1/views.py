@@ -1,36 +1,36 @@
 from pyramid.response import Response
-from pyramid.view import view_config
+#from pyramid.view import view_config
 import os
 
 HERE = os.path.dirname(__file__)
 
 
-@view_config(route_name="home", renderer="templates/home.html")
+#@view_config(route_name="index", renderer="templates/index.html")
 def list_view(request):
-    imported_text = open(os.path.join(HERE, './templates/home.html')).read()
+    imported_text = open(os.path.join(HERE, './templates/index.html')).read()
     return Response(imported_text)
 
 
-@view_config(route_name="detail", renderer="templates/detail.html")
+#@view_config(route_name="detail", renderer="templates/detail.html")
 def detail_view(request):
     imported_text = open(os.path.join(HERE, './templates/detail.html')).read()
     return Response(imported_text)
 
 
-@view_config(route_name="create", renderer="templates/create.html")
+#@view_config(route_name="entry", renderer="templates/create.html")
 def create_view(request):
-    imported_text = open(os.path.join(HERE, './templates/new.html')).read()
+    imported_text = open(os.path.join(HERE, './templates/entry.html')).read()
     return Response(imported_text)
 
 
-@view_config(route_name="update", renderer="templates/edit.html")
+#@view_config(route_name="update", renderer="templates/edit.html")
 def update_view(request):
     imported_text = open(os.path.join(HERE, './templates/edit.html')).read()
     return Response(imported_text)
 
 
 def includeme(config):
-    config.add_view(list_view, route_name='home')
-    config.add_view(detail_view, route_name='detail')
-    config.add_view(create_view, route_name='create')
-    config.add_view(update_view, route_name='update')
+    config.add_view(list_view, route_name='list_view')
+    config.add_view(detail_view, route_name='detail_view')
+    config.add_view(entry_view, route_name='entry_view')
+    config.add_view(edit_view, route_name='edit_view')
