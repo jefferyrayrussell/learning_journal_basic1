@@ -2,7 +2,7 @@
 
 from pyramid.view import view_config
 
-Entries = [
+ENTRIES = [
     {'title': 'LJ - Test 1', 'creation_date': '08.24.16', 'id': 1, 'body': 'This is text for test entry 1'},
     {'title': 'LJ - Test 2', 'creation_date': '08.25.16', 'id': 2, 'body': 'This is text for test entry 2'},
     {'title': 'LJ - Test 3', 'creation_date': '08.26.16', 'id': 3, 'body': 'This is text for test entry 3'},
@@ -13,7 +13,7 @@ Entries = [
 @view_config(route_name='home', renderer='templates/list.jinja2')
 def list_view(request):
     """Return the Index page for the Learning Journal."""
-    return {'entries': Entries}
+    return {'entries': ENTRIES}
 
 
 @view_config(route_name='detail_view', renderer='templates/detail.jinja2')
@@ -36,4 +36,3 @@ def edit_view(request):
     for entry in ENTRIES:
         if entry['id'] == int(request.matchdict['id']):
             return entry
-
