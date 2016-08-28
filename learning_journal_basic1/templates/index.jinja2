@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../static/base.css">
+    <title>Learning Journal by Jeffery Russell</title>   
+  </head>
+  <body>
+    <header>
+      <h1>Daily Learning Journal<h1>
+      <h2>Jeffery Ray Russell</h2>
+      <br>
+      <h3>Code 401 Advanced Software Development in Python</h3>  
+      <h3>Code Fellows Seattle</h3>
+      <br>
+      <article>
+        <h3><a href="{{ request.route_url('home') }}"></a></h3>
+        <h3><a href="{{ request.route_url('entry_view') }}">New Entry</a></h3>
+      </article>
+    </header>
+    <main>
+      {% block body %}
+      {% endblock %}
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>

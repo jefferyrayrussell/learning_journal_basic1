@@ -1,0 +1,15 @@
+{% extends "index.jinja2" %}
+{% block body %}
+  {% if entries %}
+    {% for entry in entries %}
+      <article>
+        <h3>Journal Entries</h3>
+        <h2><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a></h2>
+        <hr />
+        <p>{{ entry.creation_date }}</p>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>This journal entry is empty.</p>
+  {% endif %}
+{% endblock %}
