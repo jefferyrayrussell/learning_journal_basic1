@@ -6,7 +6,7 @@ ENTRIES = [
     {'title': 'LJ - Test 1', 'creation_date': '08.24.16', 'id': 1, 'body': 'Test text entry 1'},
     {'title': 'LJ - Test 2', 'creation_date': '08.25.16', 'id': 2, 'body': 'Test text entry 2'},
     {'title': 'LJ - Test 3', 'creation_date': '08.26.16', 'id': 3, 'body': 'Test text entry 3'},
-    {'title': 'LJ - Test 4', 'creation_date': '08.27.16', 'id': 3, 'body': 'Test text entry 4'},
+    {'title': 'LJ - Test 4', 'creation_date': '08.27.16', 'id': 4, 'body': 'Test text entry 4'},
 ]
 
 
