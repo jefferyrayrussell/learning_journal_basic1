@@ -2,8 +2,8 @@
 {% block body %}
     <article>
         <h1>{{ title }}</h1>
-        <h3>{{ creation_date }}/h3>
+        <h3>{{ creation_date }}</h3>
         <p>{{ body }}</p>
-        <a href="{{request.route_url('edit_view', id=id) }}"
+        <a href="{{request.route_url('edit_view', id=id) }}">Edit This Entry</a>
       </article>
 {% endblock %}

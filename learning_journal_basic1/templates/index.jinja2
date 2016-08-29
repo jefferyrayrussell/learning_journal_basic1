@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="../static/base.css">
+    <link type="text/css" rel="stylesheet" href="{{ request.static_path('learning_journal_basic1:static/base.css') }}">
     <title>Learning Journal by Jeffery Russell</title>   
   </head>
   <body>
@@ -10,8 +10,8 @@
       <h2>Jeffery Ray Russell</h2>
       <br>
       <article>
-        <h3><a href="{{ request.route_url('home') }}"></a></h3>
-        <h3><a href="{{ request.route_url('entry_view') }}">New Entry</a></h3>
+        <h3><a href="{{ request.route_url('home') }}">Home:  List Journal Entries Page</a></h3>
+        <h3><a href="{{ request.route_url('entry_view') }}">Create:  New Journal Entry Page</a></h3>
       </article>
     </header>
     <main>
