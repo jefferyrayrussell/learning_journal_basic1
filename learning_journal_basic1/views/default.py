@@ -13,7 +13,17 @@ def my_view(request):
         one = query.filter(MyModel.title == 'one').first()
     except DBAPIError:
         return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'jeff_learning_journal'}
+    return {'one': one, 'project': 'learning_journal_basic1'}
+
+
+@view_config(route_name='edit-view', renderer='../templates/edit-model.jinja2')
+def edit_view(request):
+    try:
+        query = request.dbsession.query(MyModel)
+        one = query.filter(MyModel.title == 'one').first()
+    except DBAPIError:
+        return Response(db_err_msg, content_type='text/plain', status=500)
+    return {'one': one, 'project': 'learning_journal_basic1'}
 
 
 db_err_msg = """\
