@@ -17,7 +17,9 @@ from ..models import (
 )
 
 from ..models import MyModel
-from ..views.default import ENTRIES
+from ..models.entries import ENTRIES
+
+# from ..views.default import ENTRIES
 
 
 def usage(argv):
@@ -36,7 +38,7 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri, options=options)
 
     engine = get_engine(settings)
-    Base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)  # Thank you Chris!
     Base.metadata.create_all(engine)
 
     session_factory = get_session_factory(engine)
@@ -45,4 +47,4 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
         for entry in ENTRIES:
             table = MyModel(title=entry['title'], date=entry['date'], body=entry['body'])
-        dbsession.add(table)
+            dbsession.add(table)

@@ -3,35 +3,35 @@ from pyramid.view import view_config
 from sqlalchemy.exc import DBAPIError
 from ..models import MyModel
 from pyramid.httpexceptions import HTTPFound
+from datetime import datetime
 
-ENTRIES = [
-    {
-        "id": 1,
-        "title": "Day1",
-        "date": "August 21, 2016",
-        "body": "Today I learned about Chevrolet."
-    },
-    {
-        "id": 2,
-        "title": "Day2",
-        "date": "August 22, 2016",
-        "body": "Today I learned about Ford."
-    },
-    {
-        "id": 3,
-        "title": "Day3",
-        "date": "August 23, 2016",
-        "body": "Today I learned about Chrysler."
-    },
-]
+# ENTRIES = [
+#     {
+#         "id": 1,
+#         "title": "Day1: Chevrolet Camaros",
+#         "date": "August 21, 2016",
+#         "body": "Today I learned about Chevrolet Camaros."
+#     },
+#     {
+#         "id": 2,
+#         "title": "Day2: Ford Mustangs",
+#         "date": "August 22, 2016",
+#         "body": "Today I learned about Ford Mustangs."
+#     },
+#     {
+#         "id": 3,
+#         "title": "Day3: Dodge Chargers",
+#         "date": "August 23, 2016",
+#         "body": "Today I learned about Dodge Chargers."
+#     },
+# ]
 
 
 @view_config(route_name='home', renderer='../templates/list.jinja2')
 def home_view(request):
-    """Disply a list of all entries in the database on Home Page."""
+    """Display a list of all entries in the database on Home Page."""
     try:
         query = request.dbsession.query(MyModel)
-        # query = request.dbsession.query.orderby.all(MyModel)
         entries = query.all()
     except DBAPIError:
         return Response(db_err_msg, content_type='text/plain', status=500)
@@ -55,12 +55,20 @@ def entry_view(request):
     """Display an empty form on GET."""
     """Create a new entry, a new model, and return to the Home on POST."""
     """Display an error message if inputs title/body are left empty."""
+    
+# try:
+#         query = request.dbsession.query(MyModel)
+#         entries = query.all()
+#     except DBAPIError:
+
+
+
     if request.method == 'GET':
         return {}
     if request.method == 'POST':
         if request.POST['title'] != '' or request.POST['body'] != '':
             new_title = request.POST['title']
-            new_date = request.POST['date']
+            new_date = datetime.now()
             new_body = request.POST['body']
             entry = MyModel(date=new_date, title=new_title, body=new_body)
             request.dbsession.add(entry)
@@ -79,10 +87,9 @@ def edit_view(request):
     elif request.method == 'POST':
         if request.POST['title'] != '' or request.POST['body'] != '':
             new_title = request.POST['title']
-            new_date = request.POST['date']
             new_body = request.POST['body']
-            entry = MyModel(date=new_date, title=new_title, body=new_body)
-            request.dbsession.add(entry)
+            entry.title = new_title
+            entry.body = new_body
             return HTTPFound(request.route_url('home'))
         else:
             error_msg = "Cannot submit empty entry."
