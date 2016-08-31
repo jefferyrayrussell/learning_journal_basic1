@@ -53,7 +53,7 @@ def includeme(config):
     """
     Initialize the model for a Pyramid app.
 
-    Activate this setup using ``config.include('jeff_learning_journal.models')``.
+    Activate this setup using ``config.include('learning_journal_basic1_db.models')``.
 
     """
     settings = config.get_settings()

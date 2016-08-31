@@ -15,7 +15,9 @@ from ..models import (
     get_session_factory,
     get_tm_session,
 )
+
 from ..models import MyModel
+from ..views.default import ENTRIES
 
 
 def usage(argv):
@@ -40,6 +42,6 @@ def main(argv=sys.argv):
 
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
-
-        model = MyModel(title='one', body="1", creation_date="1")
-        dbsession.add(model)
+        for entry in ENTRIES:
+            table = MyModel(title=entry['title'], date=entry['date'], body=entry['body'])
+        dbsession.add(table)

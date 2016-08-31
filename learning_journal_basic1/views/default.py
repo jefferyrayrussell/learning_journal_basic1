@@ -6,28 +6,22 @@ from pyramid.httpexceptions import HTTPFound
 
 ENTRIES = [
     {
-        "title": "Day1",
         "id": 1,
+        "title": "Day1",
         "date": "August 21, 2016",
         "body": "Today I learned about Chevrolet."
     },
     {
-        "title": "Day2",
         "id": 2,
+        "title": "Day2",
         "date": "August 22, 2016",
         "body": "Today I learned about Ford."
     },
     {
-        "title": "Day3",
         "id": 3,
+        "title": "Day3",
         "date": "August 23, 2016",
         "body": "Today I learned about Chrysler."
-    },
-    {
-        "title": "Day4",
-        "id": 4,
-        "date": "August 24, 2016",
-        "body": "Today I learned about Dodge."
     },
 ]
 
@@ -66,9 +60,9 @@ def entry_view(request):
     if request.method == 'POST':
         if request.POST['title'] != '' or request.POST['body'] != '':
             new_title = request.POST['title']
+            new_date = request.POST['date']
             new_body = request.POST['body']
-            new_date = request.Post['date']
-            entry = MyModel(title=new_title, body=new_body, date=new_date)
+            entry = MyModel(date=new_date, title=new_title, body=new_body)
             request.dbsession.add(entry)
             return HTTPFound(request.route_url('home'))
         else:
@@ -85,9 +79,9 @@ def edit_view(request):
     elif request.method == 'POST':
         if request.POST['title'] != '' or request.POST['body'] != '':
             new_title = request.POST['title']
+            new_date = request.POST['date']
             new_body = request.POST['body']
-            new_date = request.Post['date']
-            entry = MyModel(title=new_title, body=new_body, date=new_date)
+            entry = MyModel(date=new_date, title=new_title, body=new_body)
             request.dbsession.add(entry)
             return HTTPFound(request.route_url('home'))
         else:
@@ -100,7 +94,7 @@ db_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
 
-1.  You may need to run the "initialize_jeff_learning_journal_basic1_db" script
+1.  You may need to run the "initialize_learning_journal_basic1_db" script
     to initialize your database tables.  Check your virtual
     environment's "bin" directory for this script and try to run it.
 

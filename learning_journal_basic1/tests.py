@@ -3,13 +3,13 @@ import transaction
 
 from pyramid import testing
 
-from ..models import (
+from .models import (
     MyModel,
     get_engine,
     get_session_factory,
     get_tm_session,
 )
-from ..models.meta import Base
+from .models.meta import Base
 
 
 @pytest.fixture(scope="session")
