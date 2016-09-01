@@ -7,8 +7,7 @@ from datetime import datetime
 
 from ..models import MyModel
 
-
-TIME_FORMAT = '%Y-%m-%d'
+TIME_FORMAT = '%b %d, %Y'
 
 
 @view_config(route_name='home', renderer='../templates/list.jinja2')
@@ -25,12 +24,9 @@ def home_view(request):
 @view_config(route_name='detail_view', renderer='../templates/detail.jinja2')
 def detail_view(request):
     """Display details of a particular entry based on id."""
-    try:
-        query = request.dbsession.query(MyModel)
-        entry = query.filter(MyModel.id ==
-                             int(request.matchdict['id'])).first()
-    except DBAPIError:
-        return Response(db_err_msg, content_type='text/plain', status=500)
+    query = request.dbsession.query(MyModel)
+    entry = query.filter(MyModel.id ==
+                            int(request.matchdict['id'])).first()
     return {'entry': entry}
 
 
@@ -76,7 +72,7 @@ def edit_view(request):
             new_body = request.POST['body']
             entry.title = new_title
             entry.body = new_body
-            return HTTPFound(request.route_url('home'))
+            # return HTTPFound(request.route_url('home'))
         else:
             error_msg = "Cannot submit empty entry."
             return {'error_msg': error_msg}

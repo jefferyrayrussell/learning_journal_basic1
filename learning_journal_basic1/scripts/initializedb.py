@@ -1,7 +1,6 @@
 import os
 import sys
 import transaction
-
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
@@ -17,9 +16,10 @@ from ..models import (
 )
 
 from ..models import MyModel
-from ..models.entries import ENTRIES
+from ..entries import ENTRIES
 
-# from ..views.default import ENTRIES
+from datetime import datetime
+from ..views.default import TIME_FORMAT
 
 
 def usage(argv):
@@ -46,5 +46,7 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
         for entry in ENTRIES:
-            table = MyModel(title=entry['title'], date=entry['date'], body=entry['body'])
+            table = MyModel(title=entry['title'], body=entry['body'], date=datetime.strptime(entry['date'], TIME_FORMAT))
             dbsession.add(table)
+
+            # date=entry['date'], body=entry['body'])
