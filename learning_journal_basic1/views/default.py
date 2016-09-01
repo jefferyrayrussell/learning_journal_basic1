@@ -1,30 +1,14 @@
 from pyramid.response import Response
 from pyramid.view import view_config
 from sqlalchemy.exc import DBAPIError
-from ..models import MyModel
+
 from pyramid.httpexceptions import HTTPFound
 from datetime import datetime
 
-# ENTRIES = [
-#     {
-#         "id": 1,
-#         "title": "Day1: Chevrolet Camaros",
-#         "date": "August 21, 2016",
-#         "body": "Today I learned about Chevrolet Camaros."
-#     },
-#     {
-#         "id": 2,
-#         "title": "Day2: Ford Mustangs",
-#         "date": "August 22, 2016",
-#         "body": "Today I learned about Ford Mustangs."
-#     },
-#     {
-#         "id": 3,
-#         "title": "Day3: Dodge Chargers",
-#         "date": "August 23, 2016",
-#         "body": "Today I learned about Dodge Chargers."
-#     },
-# ]
+from ..models import MyModel
+
+
+TIME_FORMAT = '%Y-%m-%d'
 
 
 @view_config(route_name='home', renderer='../templates/list.jinja2')
@@ -55,33 +39,37 @@ def entry_view(request):
     """Display an empty form on GET."""
     """Create a new entry, a new model, and return to the Home on POST."""
     """Display an error message if inputs title/body are left empty."""
-    
-# try:
-#         query = request.dbsession.query(MyModel)
-#         entries = query.all()
-#     except DBAPIError:
-
-
 
     if request.method == 'GET':
         return {}
     if request.method == 'POST':
         if request.POST['title'] != '' or request.POST['body'] != '':
-            new_title = request.POST['title']
             new_date = datetime.now()
+            new_title = request.POST['title']
             new_body = request.POST['body']
-            entry = MyModel(date=new_date, title=new_title, body=new_body)
-            request.dbsession.add(entry)
-            return HTTPFound(request.route_url('home'))
+            new_entry = MyModel(date=new_date, title=new_title, body=new_body)
+
+            request.dbsession.add(new_entry)
+            url = request.route_url('detail', id=entry.id)
+            return HTTPFound(location=url)
         else:
             error_msg = "Cannot submit empty entry."
             return {'error_msg': error_msg}
+    return {}
 
 
 @view_config(route_name='edit_view', renderer='../templates/edit.jinja2')
 def edit_view(request):
     """Display details of a single entry on GET."""
     """Edit an existing entry and go to home page on POST."""
+
+    try:
+        query = request.dbsession.query(MyModel)
+        entry = query.filter(MyModel.id ==
+                             int(request.matchdict['id'])).first()
+    except DBAPIError:
+        return Response(db_err_msg, content_type='text/plain', status=500)
+
     if request.method == "GET":
         return detail_view(request)
     elif request.method == 'POST':

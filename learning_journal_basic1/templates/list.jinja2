@@ -3,7 +3,7 @@
   {% if entries %}
     {% for entry in entries %}
       <article>
-        <h4>{{ entry.date }}<a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a></h4>
+        <h4><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a><br>{{ entry.date }}</h4>
       </article>
     {% endfor %}
   {% else %}
