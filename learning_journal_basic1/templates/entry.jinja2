@@ -1,10 +1,20 @@
 {% extends 'index.jinja2' %}
 {% block body %}
-  <form>
-      <input type="text" name="Title" placeholder="Journal Entry Title">
-      <br>
-      <textarea rows="10" cols="100" name = "journal" id = "journal">
-      </textarea><br>
-      <input type="submit" value="Submit">
+
+  <form action="{{  request.route_url('entry_view') }}" method="POST">
+
+    New Title:
+    <br>
+    <input type="text" size="50" name="title"/><br>
+    <br>
+
+    New Entry:
+    <br>
+    <textarea rows="15" cols="100" name = "body">
+    </textarea>
+    <br>
+
+    <input type="submit" value="Submit">
+  
   </form>
 {% endblock %}

@@ -48,14 +48,12 @@ def entry_view(request):
             new_title = request.POST['title']
             new_body = request.POST['body']
             new_entry = MyModel(date=new_date, title=new_title, body=new_body)
-
             request.dbsession.add(new_entry)
-            url = request.route_url('detail', id=entry.id)
-            return HTTPFound(location=url)
+            return HTTPFound(request.route_url('home'))
         else:
             error_msg = "Cannot submit empty entry."
             return {'error_msg': error_msg}
-    return {}
+    return HTTPFound(request.route_url('home'))
 
 
 @view_config(route_name='edit_view', renderer='../templates/edit.jinja2')

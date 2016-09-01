@@ -2,9 +2,11 @@
 {% block body %}
   {% if entries %}
     {% for entry in entries %}
+
       <article>
-        <h4><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a><br>{{ entry.date }}</h4>
+        <h6>{{ entry.date }}<br><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a></h6>
       </article>
+
     {% endfor %}
   {% else %}
     <p>This journal entry is empty.</p>
