@@ -2,7 +2,7 @@
 {% block body %}
     <article>
       <h1>{{ entry.title }}</h1>
-      <h3>{{ entry.date.strftime('%b %d, %Y %H:%M') }}</h3>
+      <h3>{{ entry.date.strftime('%B %d, %Y') }}</h3>
       <p>{{ entry.body }}</p>
       <a href="{{request.route_url('edit_view', id=entry.id) }}"><h5>Edit This Entry</h5></a>
     </article>

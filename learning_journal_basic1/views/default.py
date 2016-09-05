@@ -7,7 +7,7 @@ from datetime import datetime
 
 from ..models import MyModel
 
-TIME_FORMAT = '%b %d, %Y'
+TIME_FORMAT = '%B %d, %Y'
 
 
 @view_config(route_name='home', renderer='../templates/list.jinja2')
@@ -26,7 +26,7 @@ def detail_view(request):
     """Display details of a particular entry based on id."""
     query = request.dbsession.query(MyModel)
     entry = query.filter(MyModel.id ==
-                        int(request.matchdict['id'])).first()
+                                    int(request.matchdict['id'])).first()
     return {'entry': entry}
 
 
@@ -34,7 +34,8 @@ def detail_view(request):
 def entry_view(request):
     """Display an empty form on GET.
     Create a new entry, a new model, and return to the Home on POST.
-    Display an error message if inputs title/body are left empty."""
+    Display an error message if inputs title/body are left empty.
+    """
 
     if request.method == 'GET':
         return {}
@@ -55,7 +56,8 @@ def entry_view(request):
 @view_config(route_name='edit_view', renderer='../templates/edit.jinja2')
 def edit_view(request):
     """Display details of a single entry on GET.
-    Edit an existing entry and go to home page on POST."""
+    Edit an existing entry and go to home page on POST.
+    """
 
     try:
         query = request.dbsession.query(MyModel)

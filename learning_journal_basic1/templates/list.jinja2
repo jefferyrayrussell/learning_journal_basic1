@@ -4,8 +4,10 @@
     {% for entry in entries %}
 
       <article>
-        <h5><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a></h5>
-        <h5>{{ entry.date.strftime('%b %d, %Y %H:%M') }}</h5> 
+        {# <h5><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}</a></h5> #}
+        {# <h5>{{ entry.date.strftime('%B %d, %Y') }}</h5> #} 
+      
+        <h5><a href="{{ request.route_url('detail_view', id=entry.id) }}">{{ entry.title }}{{ entry.date.strftime(',  %B %d, %Y') }}</a></h5>   
       </article>
 
     {% endfor %}
