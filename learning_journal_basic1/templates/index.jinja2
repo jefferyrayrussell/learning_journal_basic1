@@ -6,12 +6,12 @@
   </head>
   <body>
     <header>
-      <h1>Daily Learning Journal<h1>
+      <h2>Daily Learning Journal<h2>
       <h2>Jeffery Ray Russell</h2>
       <br>
       <navbar>
-        <h3><a href="{{ request.route_url('home') }}">Home:  List Journal Entries Page</a></h3>
-        <h3><a href="{{ request.route_url('entry_view') }}">Create:  New Journal Entry Page</a></h3>
+        <h5><a href="{{ request.route_url('home') }}">Home:  List Entries Page</a></h5>
+        <h5><a href="{{ request.route_url('entry_view') }}">Create:  New Entry Page</a></h5>
       </navbar>
     </header>
     <main>
@@ -19,8 +19,8 @@
       {% endblock %}
     </main>
     <footer>
-      <h3>Code 401 Advanced Software Development in Python</h3>  
-      <h3>Code Fellows Seattle</h3>
+      <h4>Code 401: Advanced Software Development in Python</h4>  
+      <h4>Code Fellows - Seattle</h4>
     </footer>
   </body>
 </html>

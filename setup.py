@@ -10,9 +10,14 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 
 requires = [
     'pyramid',
+    'pyramid_ipython',
     'pyramid_jinja2',
     'pyramid_debugtoolbar',
+    'pyramid_tm',
     'waitress',
+    'SQLAlchemy',
+    'transaction',
+    'zope.sqlalchemy',
 ]
 
 tests_require = [
@@ -35,7 +40,7 @@ setup(name='learning_journal_basic1',
       author='Jeffery Ray Russell',
       author_email='jefferyrayrussell@gmail.com',
       url='https://github.com/jefferyrayrussell/learning_journal_basic1',
-      keywords='web pyramid pylons',
+      keywords='web wsgi bfg pyramid pylons',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
@@ -46,5 +51,6 @@ setup(name='learning_journal_basic1',
       entry_points="""\
       [paste.app_factory]
       main = learning_journal_basic1:main
-      """,
+      [console_scripts]
+      initialize_db = learning_journal_basic1.scripts.initializedb: main""",
       )

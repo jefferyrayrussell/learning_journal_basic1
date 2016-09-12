@@ -1,9 +1,10 @@
 {% extends 'index.jinja2' %}
 {% block body %}
     <article>
-        <h1>{{ title }}</h1>
-        <h3>{{ creation_date }}</h3>
-        <p>{{ body }}</p>
-        <a href="{{request.route_url('edit_view', id=id) }}">Edit This Entry</a>
-      </article>
+      <h1>{{ entry.title }}</h1>
+      <h3>{{ entry.date.strftime('%B %d, %Y') }}</h3>
+      <p>{{ entry.body }}</p>
+      <a href="{{request.route_url('edit_view', id=entry.id) }}"><h5>Edit This Entry</h5></a>
+    </article>
 {% endblock %}
+

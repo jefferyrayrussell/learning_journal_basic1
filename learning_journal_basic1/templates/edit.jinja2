@@ -1,9 +1,20 @@
 {% extends 'index.jinja2' %}
 {% block body %}
-  <form>
-    <input type="text" name="title" value="{{title}}"></br>
-    <textarea rows="10" cols="100">{{body}}
-    </textarea></br>
-    <input type="submit" value="Submit" disabled>
+
+  <form action="{{ request.route_url('edit_view', id=entry.id) }}" method="POST">
+    
+    Edit Title:
+    <br>
+    <input type="text" size="50" name="title" value="{{ entry.title }}"></br>
+    <br>
+
+    Edit Entry:
+    <br>
+    <textarea rows="15" cols="100" name="body">{{ entry.body }}
+    </textarea>
+    <br>
+
+    <input type="submit" value="Submit"/>
+
   </form> 
 {% endblock %}
